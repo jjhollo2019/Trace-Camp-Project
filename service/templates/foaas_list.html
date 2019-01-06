@@ -1,0 +1,32 @@
+{% extends 'header.html' %}
+
+{% block content %}
+    
+<body style="background-color:#651fff;"></body>
+    <table>
+        <thead>
+            <tr>
+             <th>Messages:</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for message in object_list %}
+            <tr>
+                <td>{{ message }}</td>
+                <td>
+                    <form method="post">{% csrf_token %}
+                        <a class="waves-effect waves-light btn blue lighten-2" href="/FOAAS/delete/{{message.id}}">Delete Me! <i class="fas fa-dumpster-fire"></i></a>
+                    </form>
+                </td>
+                <td>
+                        <form method="post">{% csrf_token %}
+                            <a class="waves-effect waves-light btn blue lighten-2" href="/FOAAS/detail/{{message.id}}">View Me! <i class="fas fa-dumpster-fire"></i></a>
+                        </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</body>
+{% endblock %}
