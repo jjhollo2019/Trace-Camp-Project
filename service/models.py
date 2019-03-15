@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse_lazy
+from service.generator import imageGen
 
 # Create your models here.
 class FOAAS(models.Model):
@@ -8,6 +9,12 @@ class FOAAS(models.Model):
     box_3 = models.TextField(blank=True)
     foaas_message = models.TextField()
     message_url = models.URLField()
+    image_url = models.URLField()
+
+    def save(self):
+        image = imageGen.ImageGenerator()
+        self.image_url = image.generateImage(self.foaas_message)
+        super(FOAAS, self).save()
 
     def get_absolute_url(self):
         return reverse_lazy('FOAAS_detail', args = [str(self.id)])

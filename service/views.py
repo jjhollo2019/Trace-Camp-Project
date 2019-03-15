@@ -76,7 +76,7 @@ class FOAASCreateView(CreateView):
                 self.message_url = self.message_url.replace(f':{boxes[box]}', add)
             count +=1
         headers = {'Accept': 'text/plain'}
-        message.foaas_message = requests.get(f'{self.message_url}', headers=headers).text
+        message.foaas_message = requests.get(f'{self.message_url}', headers=headers).text    
         return super().form_valid(form)
 
 
